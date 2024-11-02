@@ -1,8 +1,17 @@
 ﻿#include <iostream>
-#include <cstring> // для функции strlen
 #include <locale>  // для установки локали
 
 using namespace std;
+
+// Функция для вычисления размера строки в байтах (включая '\0')
+int stringSize(const char* str) {
+    int size = 0;
+    while (str[size] != '\0') {
+        size++;
+    }
+    // Увеличиваем размер на 1 для учета завершающего нулевого символа
+    return size + 1;
+}
 
 int main() {
     setlocale(LC_ALL, "Russian");
@@ -11,20 +20,9 @@ int main() {
     char inputStr[256];
     cin.getline(inputStr, 256);
 
-    // Вариант 1: Использование встроенной функции strlen
-    int length_builtin = strlen(inputStr);
-    cout << "Вариант 1: Использование встроенной функции strlen" << endl;
-    cout << "Длина строки: " << length_builtin << endl;
-    cout << "-----------" << endl;
-
-    // Вариант 2: Ручной посимвольный перебор
-    int length_manual = 0;
-    while (inputStr[length_manual] != '\0') {
-        length_manual++;
-    }
-
-    cout << "Вариант 2: Ручной посимвольный перебор" << endl;
-    cout << "Длина строки: " << length_manual << endl;
+    // Вызов функции для вычисления размера строки
+    int size = stringSize(inputStr);
+    cout << "Размер строки (с учетом завершающего символа '\\0'): " << size << " байт" << endl;
 
     return 0;
 }
